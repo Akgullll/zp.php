@@ -15,16 +15,17 @@ class Qna {
         "Aká je ekologická politika spoločnosti Apple?" => "Spoločnosť Apple sa snaží minimalizovať vplyv na životné prostredie, používa udržateľné materiály a recyklačné procesy vo svojich zariadeniach."
     ];
 
+    // Metóda getQnaHTML() generuje HTML pre zobrazenie otázok a odpovedí v akordeóne
     public function getQnaHTML() {
-        $html = '<div class="accordion">';
+        $html = '<div class="accordion">'; // Začiatok divu pre akordeón
         foreach ($this->questions as $question => $answer) {
-            $html .= '<details>';
-            $html .= '<summary>' . $question . '</summary>';
-            $html .= '<p>' . $answer . '</p>';
-            $html .= '</details>';
+            $html .= '<details>'; // Začiatok detailu pre jednu otázku
+            $html .= '<summary>' . $question . '</summary>'; // Zobrazenie otázky ako nadpis
+            $html .= '<p>' . $answer . '</p>'; // Zobrazenie odpovede na otázku
+            $html .= '</details>'; // Koniec detailu pre jednu otázku
         }
-        $html .= '</div>';
-        return $html;
+        $html .= '</div>'; // Koniec divu pre akordeón
+        return $html; // Vrátenie vygenerovaného HTML kódu
     }
 }
 
