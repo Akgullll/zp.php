@@ -2,6 +2,8 @@
 include('_inc/classes/Product.php');
 include('partials/header.php');
 
+
+// Vytvorenie zoznamu produktov
 $products = [
     new Product("iPhone", "Smartfón, ktorý zmenil svet mobilných technológií.", 799),
     new Product("iPad", "Tablet, ktorý kombinuje výkon počítača a mobilnú ľahkosť.", 499),
@@ -14,6 +16,7 @@ $products = [
 
 <main>
     <section class="container">
+        <!-- Sekcia s názvom a popisom produktov -->
         <h1>Produkcia Apple</h1>
         <ul>
             <?php foreach ($products as $product): ?>
@@ -35,6 +38,7 @@ $products = [
         </table>
     </section>
 </main>
-<?php include_once('partials/footer.php'); ?>
-
+<?php 
+include_once('partials/footer.php'); 
+?>
 
