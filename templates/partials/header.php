@@ -9,10 +9,11 @@ require('../_inc/config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo 'Apple | ' . basename($_SERVER["SCRIPT_NAME"], '.php'); ?></title>
     <?php
+    // Získanie názvu aktuálnej stránky
     $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');
-    $page_object = new Page();
-    $page_object->set_page_name($page_name);
-    echo $page_object->add_stylesheet();
+    $page_object = new Page(); // Vytvorenie inštancie triedy Page
+    $page_object->set_page_name($page_name); // Nastavenie názvu stránky
+    echo $page_object->add_stylesheet();// Zahrnutie štýlových súborov pre danú stránku
     ?>
 </head>
 <body>
@@ -36,8 +37,8 @@ require('../_inc/config.php');
                 $pages['Odhlasiť'] = 'logout.php';
             }
 
-            $menu_object = new Menu($pages);
-            echo $menu_object->generate_menu();
+            $menu_object = new Menu($pages);// Vytvorenie inštancie triedy Menu s definovanými stránkami
+            echo $menu_object->generate_menu(); // Generovanie navigačného menu
             ?>
         </ul>
         <a class="hamburger" id="hamburger">
