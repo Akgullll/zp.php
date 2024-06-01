@@ -25,9 +25,9 @@ class Database {
 
             return $this->connection;
         } catch (PDOException $e) {
-            echo "Chyba pri registrácii: " . $e->getMessage();
-                return false;
-            }
+            echo "Chyba pri registrácii: " . $e->getMessage(); // Výpise chybovej správy v prípade chyby
+            return false; // Návratová hodnota false v prípade chyby pripojenia
+        }
     }
 }
 ?>
