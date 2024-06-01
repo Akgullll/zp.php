@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_user'])) {
                         <button type="submit" class="btn" name="login_user">Login</button>
                     </div>
                     <p>
-                        Not yet a member? <a href="register.php">Register</a>
+                        Not yet a member? <a href="register.php">🧸</a>
                     </p>
                 </form>
             </div>
