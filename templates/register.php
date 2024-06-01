@@ -3,9 +3,13 @@ include('partials/header.php');
 include('_inc/classes/User.php'); 
 include('partials/errors.php'); 
 
+
+// Vytvorenie inštancie triedy User
 $user = new User();
 $errors = array(); 
 
+
+// Spracovanie formulára pri registrácii používateľa
 if (isset($_POST['reg_user'])) {
 
     $username = $_POST['username'];
@@ -14,18 +18,20 @@ if (isset($_POST['reg_user'])) {
     $password_2 = $_POST['password_2'];
 
   
+    // Kontrola, či sa heslá zhodujú
     if ($password_1 == $password_2) {
   
+        // Registrácia používateľa
         $registered = $user->register($username, $email, $password_1);
         if ($registered) {
           
-            header('Location: thankyou.php');
+            header('Location: thankyou.php'); // Presmerovanie na stránku s potvrdením registrácie
             exit();
         } else {
-            $errors[] = "Registration failed. Please try again.";
+            $errors[] = "Registration failed. Please try again.";//ak registrácia zlyhala
         }
     } else {
-        $errors[] = "Passwords do not match. Please try again.";
+        $errors[] = "Passwords do not match. Please try again.";//ak heslá nezodpovedajú
     }
 }
 ?>
@@ -68,6 +74,8 @@ if (isset($_POST['reg_user'])) {
     </section>
 </main>
 
-<?php include('partials/footer.php'); ?>
+<?php 
+include('partials/footer.php'); 
+?>
 
 
