@@ -2,21 +2,27 @@
 include('partials/header.php');
 include('_inc/classes/User.php'); 
 
-session_start();
+session_start();// Spustenie relácie
 
-$user = new User();
+$user = new User();// Vytvorenie inštancie triedy User
 
-$error_message = '';
+$error_message = '';// Premenná pre chybovú správu
 
+// Overenie, či bol odoslaný požiadavok metódou POST a či bol odoslaný formulár s prihlasovacími údajmi
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_user'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    // Overenie prihlasovacích údajov
     if ($user->login($email, $password)) {
+
+        // Ak sú prihlasovacie údaje správne, nastavíme reláciu a presmerujeme na administračnú časť
         $_SESSION['logged_in'] = true;
         header('Location: admin.php');
         exit();
     } else {
+
+        // Ak sú prihlasovacie údaje nesprávne, nastavíme chybovú správu
         $error_message = "Invalid email or password. Please try again.";
     }
 }
