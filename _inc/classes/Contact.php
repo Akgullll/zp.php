@@ -1,12 +1,14 @@
 <?php
 /* Môžeme vytvoriť tabuľku pomocou vzorca
 CREATE TABLE `contact` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(120) NOT NULL,
-  `message` text NOT NULL,
-  `acceptance` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci;*/
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(120) NOT NULL,
+  `message` TEXT NOT NULL,
+  `acceptance` INT(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci;
+*/
 
 
 class Contact extends Database {
