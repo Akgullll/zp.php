@@ -23,27 +23,36 @@ class Portfolio {
         ]
     ];
 
+    // Metóda na renderovanie portfólia
     public function render() {
-        $html = '';
+        $html = ''; // Inicializácia prázdneho reťazca
+
+        // Prechádzanie cez každý produkt v portfóliu
         foreach ($this->products as $product) {
+            // Vytvorenie HTML pre jednotlivý produkt
             $html .= '<div class="product">';
             $html .= '<a href="portfolio-update.php?id=' . $product["id"] . '"><img src="' . $product["image"] . '" alt="' . $product["name"] . '"></a>';
             $html .= '<h2><a href="portfolio-update.php?id=' . $product["id"] . '">' . $product["name"] . '</a></h2>';
             $html .= '<p>' . $product["description"] . '</p>';
             $html .= '</div>';
         }
-        return $html;
+
+        return $html; // Vrátenie HTML kódu pre portfólio
     }
 
+    // Metóda na získanie produktu podľa ID
     public function getProductById($id) {
+        // Prechádzanie cez každý produkt
         foreach ($this->products as $product) {
+            // Ak sa nájde produkt s rovnakým ID ako je hľadané ID
             if ($product['id'] == $id) {
-                return $product;
+                return $product; // Vrátenie nájdeného produktu
             }
         }
-        return null;
+        return null; // Ak sa produkt nenájde, vráti sa hodnota null
     }
 }
 
 ?>
+
 
