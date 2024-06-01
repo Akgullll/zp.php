@@ -69,7 +69,27 @@ class Contact extends Database {
             echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
         }
     }
-    
+
+    public function update($contact_id, $name, $email, $message, $acceptance) {
+    try {
+        // Príprava a vykonanie SQL dotazu pre aktualizáciu kontaktu v databáze podľa zadaného ID
+        $data = array(
+            'contact_id' => $contact_id,
+            'contact_name' => $name,
+            'contact_email' => $email,
+            'contact_message' => $message,
+            'contact_acceptance' => $acceptance
+        );
+        $query = "UPDATE contact 
+                  SET name = :contact_name, email = :contact_email, message = :contact_message, acceptance = :contact_acceptance 
+                  WHERE id = :contact_id";
+        $query_run = $this->db->prepare($query);
+        $query_run->execute($data);
+    } catch (PDOException $e) {
+        echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
+    }
+  }
+
 
 }
 ?>
