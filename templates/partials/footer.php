@@ -20,10 +20,10 @@
     </div>
   </footer>
     <?php
-    $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');
-    $page_object = new Page();
-    $page_object->set_page_name($page_name);
-    echo($page_object->add_scripts());
+    $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');// Získanie názvu aktuálnej stránky
+    $page_object = new Page();// Vytvorenie inštancie triedy Page
+    $page_object->set_page_name($page_name);// Nastavenie názvu stránky
+    echo($page_object->add_scripts());// Vloženie skriptov pre danú stránku
     ?>
 </body>
 </html>
