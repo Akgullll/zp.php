@@ -5,7 +5,7 @@ include('partials/header.php');
 <main>
     <section class="container">
         <div class="row">
-            <div class="col-100 text-left">
+            <div class="col-100 text-center">
                 <?php
                 // Odhlásenie používateľa z aktuálnej relácie
                 unset($_SESSION['logged_in']);
