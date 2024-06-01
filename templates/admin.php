@@ -1,11 +1,14 @@
 <?php
-
 include('partials/header.php');
+// Spustenie relácie na sledovanie stavu prihlásenia používateľa 
 
+session_start();
 
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true){
+// Kontrola, či je používateľ prihlásený na prístup do administrátorskej časti
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // Ak používateľ nie je prihlásený, presmerujeme ho na prihlasovaciu stránku
     header('Location: login.php');
-    exit; 
+    exit;
 }
 ?>
 
@@ -13,17 +16,17 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true){
     <section class="container">
         <div class="row">
             <div class="col-100 text-center">
-                <h1>Administration panel</h1>
+                <h1>Administration Panel</h1>
                 <p>Welcome, administrator!</p>
-                <a href="logout.php">🧸</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
-    </section> 
+    </section>
 </main>
 
 <?php
-
 include('partials/footer.php');
 ?>
+
 
 
