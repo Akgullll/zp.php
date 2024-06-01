@@ -18,7 +18,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <div class="col-100 text-center">
                 <h1>Administration Panel</h1>
                 <p>Welcome, administrator!</p>
-                <a href="logout.php">Logout</a>
+                <a href="logout.php">🧸</a>
             </div>
         </div>
     </section>
