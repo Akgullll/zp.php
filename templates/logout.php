@@ -7,6 +7,7 @@ include('partials/header.php');
         <div class="row">
             <div class="col-100 text-left">
                 <?php
+                // Odhlásenie používateľa z aktuálnej relácie
                 unset($_SESSION['logged_in']);
                 unset($_SESSION['is_admin']);
                 ?>
@@ -20,4 +21,5 @@ include('partials/header.php');
 <?php
 include('partials/footer.php');
 ?>
+
 
