@@ -7,6 +7,8 @@ include('partials/header.php');
             <div class="col-100 text-center">
                 <h2>Ďakujeme!(⌒‿⌒)</h2>
                 <?php
+
+                // Vytvorenie inštancie triedy Contact a vloženie údajov
                 $contact_object = new Contact();
                 $contact_object->insert();
                 ?>
