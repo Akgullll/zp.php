@@ -31,7 +31,9 @@ require('../_inc/config.php');
                 'PORTFOLIO' => 'portfolio.php',
                 'Q&A' => 'qna.php',
                 'CONTACT' => 'kontakt.php',
-                'APPLE' => 'product.php'
+                'APPLE' => 'product.php',
+                'REGISTER' => 'register.php',
+                'LOGIN' => 'login.php'
             );
             if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
                 $pages['Odhlasiť'] = 'logout.php';
