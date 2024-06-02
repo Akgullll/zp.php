@@ -9,90 +9,99 @@ CREATE TABLE `contact` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci;
 */
+// Pripojenie k databáze a definícia triedy Contact
+include_once('_inc/classes/Database.php');
 
-
-class Contact extends Database {
-
+class Contact extends Database
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = $this->db_connection();
     }
 
-    public function insert() {
-        // Overenie, či existuje pripojenie k databáze
-        if ($this->db) {
-            // Spracovanie dát z formulára
-            if (isset($_POST['contact_submitted'])) {
-                $data = array(
-                    'contact_name' => $_POST['name'],
-                    'contact_email' => $_POST['email'],
-                    'contact_message' => filter_var($_POST['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                    'contact_acceptance' => $_POST['acceptance'],
-                );
-
-                try {
-                    // Pripravenie a vykonanie SQL dotazu pre vloženie kontaktu do databázy
-                    $query = "INSERT INTO contact (name, email, message, acceptance) 
-                              VALUES (:contact_name, :contact_email, :contact_message, :contact_acceptance)";
-                    $query_run = $this->db->prepare($query);
-                    $query_run->execute($data);
-                } catch (PDOException $e) {
-                    echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
-                }
-            }
-        } else {
-            echo 'No connection'; // Výpis správy v prípade chyby pripojenia k databáze
-        }
-    }
-
-    public function select() {
+    // Vytvorenie nového kontaktu
+    public function create($name, $email, $message, $acceptance)
+    {
         try {
-            // Vykonanie SQL dotazu na výber všetkých kontaktov z tabuľky contact
-            $sql = "SELECT * FROM contact";
-            $query = $this->db->query($sql);
-            $contacts = $query->fetchAll(); // Získanie výsledkov dotazu
-            return $contacts; // Vrátenie všetkých kontaktov
+            $query = "INSERT INTO contact (name, email, message, acceptance) VALUES (:name, :email, :message, :acceptance)";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(array(
+                ':name' => $name,
+                ':email' => $email,
+                ':message' => $message,
+                ':acceptance' => $acceptance
+            ));
+            return true; // Vracia true pri úspešnom vykonaní operácie
         } catch (PDOException $e) {
-            echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
+            echo $e->getMessage();
+            return false; // Vracia false v prípade chyby
         }
     }
 
-    public function delete($contact_id) {
+    // Získanie všetkých kontaktov
+    public function select()
+    {
         try {
-            // Pripravenie a vykonanie SQL dotazu na vymazanie kontaktu z databázy podľa zadaného ID
-            $data = array(
-                'contact_id' => $contact_id
-            );
-            $query = "DELETE FROM contact WHERE id = :contact_id";
-            $query_run = $this->db->prepare($query);
-            $query_run->execute($data);
+            $query = "SELECT * FROM contact";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Vracia pole so všetkými kontaktmi
         } catch (PDOException $e) {
-            echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
+            echo $e->getMessage();
+            return false;
         }
     }
 
-    public function update($contact_id, $name, $email, $message, $acceptance) {
-    try {
-        // Príprava a vykonanie SQL dotazu pre aktualizáciu kontaktu v databáze podľa zadaného ID
-        $data = array(
-            'contact_id' => $contact_id,
-            'contact_name' => $name,
-            'contact_email' => $email,
-            'contact_message' => $message,
-            'contact_acceptance' => $acceptance
-        );
-        $query = "UPDATE contact 
-                  SET name = :contact_name, email = :contact_email, message = :contact_message, acceptance = :contact_acceptance 
-                  WHERE id = :contact_id";
-        $query_run = $this->db->prepare($query);
-        $query_run->execute($data);
-    } catch (PDOException $e) {
-        echo $e->getMessage(); // Výpis chybovej správy v prípade chyby
+    // Aktualizácia kontaktu
+    public function update($id, $name, $email, $message, $acceptance)
+    {
+        try {
+            $query = "UPDATE contact SET name = :name, email = :email, message = :message, acceptance = :acceptance WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(array(
+                ':name' => $name,
+                ':email' => $email,
+                ':message' => $message,
+                ':acceptance' => $acceptance,
+                ':id' => $id
+            ));
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
-  }
 
+    // Vymazanie kontaktu
+    public function delete($id)
+    {
+        try {
+            $query = "DELETE FROM contact WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(array(':id' => $id));
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 
+    // Získanie jedného kontaktu podľa ID
+    public function select_single($id)
+    {
+        try {
+            $query = "SELECT * FROM contact WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(array(':id' => $id));
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Vracia údaje jedného kontaktu
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
 ?>
+
 
